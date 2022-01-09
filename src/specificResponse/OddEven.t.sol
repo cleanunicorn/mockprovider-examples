@@ -37,9 +37,9 @@ contract OddEvenTest is DSTest {
                 data: abi.encodePacked(uint256(2))
             }),
             false
-        );        
+        );
 
-        // Cast the mock provider as IOddEven to get easy access to 
+        // Cast the mock provider as IOddEven to get easy access to
         // the methods `getOdd()` and `getEven()`
         IOddEven mockOddEven = IOddEven(address(provider));
 
@@ -47,6 +47,6 @@ contract OddEvenTest is DSTest {
         uint256 oddNumber = mockOddEven.getOdd();
         assertTrue(oddNumber % 2 == 1, "Expected odd number");
         uint256 evenNumber = mockOddEven.getEven();
-        assertTrue(evenNumber % 2 == 0, "Expected even number");            
+        assertTrue(evenNumber % 2 == 0, "Expected even number");
     }
 }

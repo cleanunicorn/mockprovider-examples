@@ -17,11 +17,8 @@ contract ReportNumberTest is DSTest {
         savesNumbersMockProvider.givenQueryReturnResponse(
             // When the `save` method is called
             abi.encodeWithSelector(ISavesNumbers.save.selector),
-            // Execution is successful with no response            
-            MockProvider.ReturnData({
-                success: true,
-                data: ""
-            }),
+            // Execution is successful with no response
+            MockProvider.ReturnData({success: true, data: ""}),
             // Call is logged
             true
         );
@@ -37,10 +34,26 @@ contract ReportNumberTest is DSTest {
         reportNumber.checkAndPossiblySave(number);
 
         // Expect the SavesNumbers contract was called with the correct parameters
-        MockProvider.CallData memory cd = savesNumbersMockProvider.getCallData(0);
-        assertEq(cd.caller, address(reportNumber), "Should be called by `ReportNumber`");
-        assertEq(cd.functionSelector, ISavesNumbers.save.selector, "Should call `save`");
-        assertEq(keccak256(cd.data), keccak256(abi.encodeWithSelector(ISavesNumbers.save.selector, number)), "Should call `save` with the correct parameters");
+        MockProvider.CallData memory cd = savesNumbersMockProvider.getCallData(
+            0
+        );
+        assertEq(
+            cd.caller,
+            address(reportNumber),
+            "Should be called by `ReportNumber`"
+        );
+        assertEq(
+            cd.functionSelector,
+            ISavesNumbers.save.selector,
+            "Should call `save`"
+        );
+        assertEq(
+            keccak256(cd.data),
+            keccak256(
+                abi.encodeWithSelector(ISavesNumbers.save.selector, number)
+            ),
+            "Should call `save` with the correct parameters"
+        );
         assertEq(cd.value, 0, "Should not send ether");
     }
 
@@ -51,10 +64,26 @@ contract ReportNumberTest is DSTest {
         reportNumber.checkAndPossiblySave(number);
 
         // Expect the SavesNumbers contract was called with the correct parameters
-        MockProvider.CallData memory cd = savesNumbersMockProvider.getCallData(0);
-        assertEq(cd.caller, address(reportNumber), "Should be called by `ReportNumber`");
-        assertEq(cd.functionSelector, ISavesNumbers.save.selector, "Should call `save`");
-        assertEq(keccak256(cd.data), keccak256(abi.encodeWithSelector(ISavesNumbers.save.selector, number)), "Should call `save` with the correct parameters");
+        MockProvider.CallData memory cd = savesNumbersMockProvider.getCallData(
+            0
+        );
+        assertEq(
+            cd.caller,
+            address(reportNumber),
+            "Should be called by `ReportNumber`"
+        );
+        assertEq(
+            cd.functionSelector,
+            ISavesNumbers.save.selector,
+            "Should call `save`"
+        );
+        assertEq(
+            keccak256(cd.data),
+            keccak256(
+                abi.encodeWithSelector(ISavesNumbers.save.selector, number)
+            ),
+            "Should call `save` with the correct parameters"
+        );
         assertEq(cd.value, 0, "Should not send ether");
-    }    
+    }
 }
